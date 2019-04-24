@@ -666,7 +666,7 @@ function season(title, episodes) {
 season.prototype = {};
 season.prototype.constructor = season;
 season.prototype.toString = function () {
-    return "\nTitle: " + this.title + "\nEspisodes: \n" + this.episodes + "\n\n";
+    return "\nTitle: " + this.title + "\nEspisodes: \n" + this.episodes + "\n";
 }
 //End object season
 

@@ -4,8 +4,12 @@
 function initPopulate() {
 
     //video System
-    var vs = videoSystem.getInstance();
-    vs.name = "The Shire"
+    try {
+        var vs = videoSystem.getInstance();
+        vs.name = "The Shire";
+    } catch (error) {
+        console.log(error.toString());
+    }
     //video system
 
     //objects categories
@@ -14,9 +18,9 @@ function initPopulate() {
     var animation = new category("Animation", "Animation is a process used by one or more animators to give the sensation of movement to images, drawings or other types of inanimate objects (figures of plasticine, for example). It is usually considered an optical illusion.");
     var comedy = new category("Comedy", "From the Latin comoedĭa, a comedy is a work that presents a majority of humorous or festive scenes and situations. The comedies seek to entertain the public and generate laughter, with endings that are usually happy. Comedy is also the genre that groups all the works of these characteristics.");
     var fantasy = new category("Fantasy", "From the Latin phantastĭcus, the adjective fantastic refers to that belonging to or relating to fantasy. Similarly, it allows you to name the fake, which has no reality or only exists in the imagination. ... Fantastic is also a genre of fiction whose main elements are supernatural and unreal.");
-    var adventure = new category("Adventure", "La novela de aventuras es un género literario que narra los viajes, el misterio y el riesgo. Una característica recurrente es la acción presente hasta dominar los escenarios, básica para el desarrollo de la trama.");
-    var sciencefiction = new category("Science-Fiction", "Ciencia ficción es la denominación de uno de los géneros derivados de la literatura de ficción, junto con la literatura fantástica y la narrativa de terror. Algunos autores estiman que el término es una mala traducción del inglés science fiction y que la correcta es ficción científica");
-    var romantic = new category("Romantic", "El cine romántico es un género cinematográfico que se caracteriza por retratar argumentos construidos de eventos y personajes relacionados con la expresión del amor y las relaciones románticas.");
+    var adventure = new category("Adventure", "The adventure novel is a literary genre that narrates travel, mystery and risk. A recurring characteristic is the present action until dominating the scenarios, basic for the development of the plot.");
+    var sciencefiction = new category("Science-Fiction", "Science fiction is the denomination of one of the genres derived from fiction literature, along with fantasy literature and horror fiction. Some authors estimate that the term is a bad translation of the English science fiction and that the correct one is scientific fiction");
+    var romantic = new category("Romantic", "Romantic cinema is a cinematographic genre that is characterized by portraying constructed arguments of events and characters related to the expression of love and romantic relationships.");
 
     //add the elements to the vs
     vs.addCategory(action);
@@ -515,7 +519,7 @@ function showHomePage() {
         frame.removeChild(frame.firstChild);
     }
 
-    var vs = videoSystem.getInstance();
+    vs = videoSystem.getInstance();
     var categories = vs.categories;
     var category = categories.next();
 
@@ -593,7 +597,7 @@ function showActors() {
         frame.removeChild(frame.firstChild);
     }
 
-    var vs = videoSystem.getInstance();
+    vs = videoSystem.getInstance();
     var actors = vs.actors;
     var actor = actors.next();
 
@@ -665,7 +669,7 @@ function showActor() {
         frame.removeChild(frame.firstChild);
     }
 
-    var vs = videoSystem.getInstance();
+    vs = videoSystem.getInstance();
     var actors = vs.actors;
     var actor = actors.next();
 
@@ -803,7 +807,7 @@ function showDirectors() {
         frame.removeChild(frame.firstChild);
     }
 
-    var vs = videoSystem.getInstance();
+    vs = videoSystem.getInstance();
     var directors = vs.directors;
     var director = directors.next();
 
@@ -872,7 +876,7 @@ function showDirector() {
         frame.removeChild(frame.firstChild);
     }
 
-    var vs = videoSystem.getInstance();
+    vs = videoSystem.getInstance();
     var directors = vs.directors;
     var director = directors.next();
 
@@ -1010,7 +1014,7 @@ function showProductions() {
         frame.removeChild(frame.firstChild);
     }
 
-    var vs = videoSystem.getInstance();
+    vs = videoSystem.getInstance();
     var cats = vs.categories;
     var cat = cats.next();
 
@@ -1082,7 +1086,7 @@ function showProduction() {
     head.setAttribute("class", "border-bottom mt-4");
     var head2 = document.createElement("h2");
     head.appendChild(head2);
-    head2.appendChild(document.createTextNode("PRODUCTION"));
+    head2.appendChild(document.createTextNode("RESOURCES"));
     head.style.color = "white";
 
     var frame = document.getElementById("frame");
@@ -1090,7 +1094,7 @@ function showProduction() {
         frame.removeChild(frame.firstChild);
     }
 
-    var vs = videoSystem.getInstance();
+    vs = videoSystem.getInstance();
     var productions = vs.productions;
     var production = productions.next();
 
@@ -1129,6 +1133,8 @@ function showProduction() {
 
             var h4 = document.createElement("h4");
             h4.setAttribute("class", "card-title text-center");
+            h4.setAttribute("id", "titleProd");
+            h4.setAttribute("value", production.value.title);
             body.appendChild(h4);
             h4.appendChild(document.createTextNode(production.value.title));
 
@@ -1138,7 +1144,20 @@ function showProduction() {
             var options = { weekday: "long", year: "numeric", day: "numeric", month: "long" };
             text1.appendChild(document.createTextNode("Publication date: " + production.value.publication.toLocaleDateString('en-En', options)));
 
-            if (production.value instanceof movie) {
+            var text8 = document.createElement("p");
+            text8.setAttribute("class", "card-text");
+            body.appendChild(text8);
+            text8.appendChild(document.createTextNode("Synopsis: " + production.value.synopsis));
+
+            var link2 = document.createElement("button");
+            link2.setAttribute("type", "button");
+            link2.setAttribute("value", "");
+            link2.setAttribute("class", "btn btn-success btn-block");
+            body.appendChild(link2);
+            link2.appendChild(document.createTextNode("Show Resource"));
+            link2.addEventListener("click", openWindow);
+
+            /* if (production.value instanceof movie) {
                 var resource = production.value.resource;
                 if (resource !== null) {
                     var text2 = document.createElement("p");
@@ -1161,7 +1180,7 @@ function showProduction() {
                     body.appendChild(text4);
                     text4.appendChild(document.createTextNode("Seasons: \n" + seasons));
                 }
-            }
+            } */
 
             var footer = document.createElement("div");
             footer.setAttribute("class", "card-footer");
