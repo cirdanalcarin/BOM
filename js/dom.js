@@ -705,6 +705,7 @@ function showActor() {
             actBody.setAttribute("class", "card-body");
             colRow2.appendChild(actBody);
             act.style.background = "#7b8e31";
+            actBody.style.color = "white";
 
             var h4 = document.createElement("h4");
             h4.setAttribute("class", "card-title text-center");
@@ -912,6 +913,7 @@ function showDirector() {
             actBody.setAttribute("class", "card-body");
             colRow2.appendChild(actBody);
             act.style.background = "#7b8e31";
+            actBody.style.color = "white";
 
             var h4 = document.createElement("h4");
             h4.setAttribute("class", "card-title text-center");
@@ -971,6 +973,7 @@ function showDirector() {
                 body2.setAttribute("class", "card-body");
                 act2.appendChild(body2);
                 act2.style.background = "#b9cc6e";
+                body2.style.color = "white";
 
                 var h6 = document.createElement("h6");
                 h6.setAttribute("class", "card-title text-center");
@@ -1003,12 +1006,6 @@ function showProductions() {
         head.removeChild(head.firstChild);
     }
 
-    head.setAttribute("class", "border-bottom mt-4");
-    var head2 = document.createElement("h2");
-    head.appendChild(head2);
-    head2.appendChild(document.createTextNode("PRODUCTIONS"));
-    head.style.color = "white";
-
     var frame = document.getElementById("frame");
     while (frame.firstChild) {
         frame.removeChild(frame.firstChild);
@@ -1020,6 +1017,13 @@ function showProductions() {
 
     while (cat.done !== true) {
         if (cat.value.name === this.value) {
+            
+            head.setAttribute("class", "border-bottom mt-4");
+            var head2 = document.createElement("h2");
+            head.appendChild(head2);
+            head2.appendChild(document.createTextNode("PRODUCTIONS: " + cat.value.name));
+            head.style.color = "white";
+
             var prods = vs.getProductionsCategory(cat.value);
             var prod = prods.next();
 
@@ -1043,6 +1047,7 @@ function showProductions() {
                 var body = document.createElement("div");
                 body.setAttribute("class", "card-body");
                 cate.appendChild(body);
+                body.style.color = "white";
 
                 var text = document.createElement("p");
                 text.setAttribute("class", "card-title text-center h3");
@@ -1086,7 +1091,7 @@ function showProduction() {
     head.setAttribute("class", "border-bottom mt-4");
     var head2 = document.createElement("h2");
     head.appendChild(head2);
-    head2.appendChild(document.createTextNode("RESOURCES"));
+    head2.appendChild(document.createTextNode("PRODUCTION"));
     head.style.color = "white";
 
     var frame = document.getElementById("frame");
@@ -1094,7 +1099,7 @@ function showProduction() {
         frame.removeChild(frame.firstChild);
     }
 
-    vs = videoSystem.getInstance();
+    var vs = videoSystem.getInstance();
     var productions = vs.productions;
     var production = productions.next();
 
@@ -1130,6 +1135,7 @@ function showProduction() {
             var body = document.createElement("div");
             body.setAttribute("class", "card-body");
             colRow2.appendChild(body);
+            body.style.color = "white";
 
             var h4 = document.createElement("h4");
             h4.setAttribute("class", "card-title text-center");
@@ -1149,38 +1155,22 @@ function showProduction() {
             body.appendChild(text8);
             text8.appendChild(document.createTextNode("Synopsis: " + production.value.synopsis));
 
-            var link2 = document.createElement("button");
-            link2.setAttribute("type", "button");
-            link2.setAttribute("value", "");
-            link2.setAttribute("class", "btn btn-success btn-block");
-            body.appendChild(link2);
-            link2.appendChild(document.createTextNode("Show Resource"));
-            link2.addEventListener("click", openWindow);
+            var link4 = document.createElement("button");
+            link4.setAttribute("type", "button");
+            link4.setAttribute("value", "");
+            link4.setAttribute("class", "btn btn-success");
+            body.appendChild(link4);
+            link4.appendChild(document.createTextNode("Show Resource"));
+            link4.addEventListener("click", openWindow);
+            link4.style.marginRight = "5px";
 
-            /* if (production.value instanceof movie) {
-                var resource = production.value.resource;
-                if (resource !== null) {
-                    var text2 = document.createElement("p");
-                    text2.setAttribute("class", "card-text");
-                    body.appendChild(text2);
-                    text2.appendChild(document.createTextNode("Resource: " + resource));
-                }
-                var location = production.value.location;
-                if (location !== null) {
-                    var text3 = document.createElement("p");
-                    text3.setAttribute("class", "card-text");
-                    body.appendChild(text3);
-                    text3.appendChild(document.createTextNode("Location: " + location));
-                }
-            } else {
-                var seasons = production.value.season;
-                if (seasons !== null) {
-                    var text4 = document.createElement("p");
-                    text4.setAttribute("class", "card-text");
-                    body.appendChild(text4);
-                    text4.appendChild(document.createTextNode("Seasons: \n" + seasons));
-                }
-            } */
+            var link5 = document.createElement("button");
+            link5.setAttribute("type", "button");
+            link5.setAttribute("value", "");
+            link5.setAttribute("class", "btn btn-success");
+            body.appendChild(link5);
+            link5.appendChild(document.createTextNode("Close Windows"));
+            link5.addEventListener("click", closeWindows);
 
             var footer = document.createElement("div");
             footer.setAttribute("class", "card-footer");
@@ -1189,7 +1179,7 @@ function showProduction() {
             var link = document.createElement("button");
             link.setAttribute("type", "button");
             link.setAttribute("value", "");
-            link.setAttribute("class", "btn btn-success btn-block");
+            link.setAttribute("class", "btn btn-success");
             footer.appendChild(link);
             link.appendChild(document.createTextNode("Go Back"));
             link.addEventListener("click", showHomePage);

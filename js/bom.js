@@ -40,7 +40,10 @@ function showResource() {
     var titleProd = document.getElementById("titleProd");
 
     for (var i = 0; i < winds.length; i++) {
-        if (winds[i].name == titleProd.textContent) {
+        if (winds[i].name == "undefined") {
+            winds[i].name == titleProd.textContent;
+            var wind = winds[i];
+        } else {
             var wind = winds[i];
         }
     }
@@ -83,6 +86,7 @@ function showResource() {
             var body = document.createElement("div");
             body.setAttribute("class", "card-body");
             colRow2.appendChild(body);
+            body.style.color = "white";
 
             var h4 = document.createElement("h4");
             h4.setAttribute("class", "card-title text-center");
